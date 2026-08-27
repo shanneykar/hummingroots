@@ -98,26 +98,20 @@ a{color:inherit;text-decoration:none}
 .obj-wrap{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;min-height:0}
 .frame{
-  position:relative;width:min(300px,26vw);aspect-ratio:1/1.18;
+  position:relative;width:min(300px,26vw);aspect-ratio:4/5;
   border:1px solid rgba(124,36,54,.42);
-  background:
-    linear-gradient(rgba(124,36,54,.05),rgba(124,36,54,.05)),
-    var(--weave);
+  background:var(--weave);
   box-shadow:0 26px 40px -22px rgba(30,27,22,.42);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
-  padding:16px;text-align:center;
+  overflow:hidden;
 }
-.frame::before,.frame::after{content:"";position:absolute;inset:0;pointer-events:none;
-  border-top:1px solid rgba(124,36,54,.16);border-bottom:1px solid rgba(124,36,54,.16)}
-.xh{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.xh i{position:absolute;background:rgba(124,36,54,.14)}
-.xh i:nth-child(1){left:0;right:0;top:50%;height:1px}
-.xh i:nth-child(2){top:0;bottom:0;left:50%;width:1px}
-.frame b{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ox);font-weight:700;position:relative;z-index:2}
-.frame em{font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.05em;
-  color:var(--soft);line-height:1.5;position:relative;z-index:2;max-width:180px}
-.ratio{position:absolute;bottom:7px;right:9px;font-size:8.5px;letter-spacing:.1em;color:rgba(124,36,54,.5)}
+/* The photo fills the frame. A fixed aspect-ratio plus object-fit means an
+   off-centre crop never shifts the layout, so nothing jumps as it loads. */
+.frame img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  /* the ground is warmer than a raw camera file — this pulls a photo toward
+     the paper without editing the original */
+  filter:saturate(.92) contrast(1.02);
+}
 
 /* the noren — questions as texture, illegible on purpose */
 .noren{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:3px;
@@ -224,11 +218,6 @@ a{color:inherit;text-decoration:none}
 .soft{text-transform:none!important;letter-spacing:.02em!important;color:var(--soft)!important;
   font-size:10.5px!important}
 
-.ph{border:1px solid rgba(124,36,54,.34);background:var(--weave);padding:18px 16px;
-  display:flex;flex-direction:column;gap:5px;min-height:96px;justify-content:center}
-.ph b{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ox)}
-.ph em{font-family:var(--mono);font-style:normal;font-size:10px;line-height:1.55;color:var(--soft)}
-.ph.wide{min-height:0;padding:14px 16px}
 
 .fld{display:flex;flex-direction:column;gap:7px}
 .fld textarea{width:100%;background:transparent;border:1px solid var(--rule);color:var(--ink);
@@ -536,10 +525,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Worn deck of cards, face down, overhead on kraft paper</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/01-reading.jpg" width="900" height="1125"
+             alt="A worn tarot deck lying face down on kraft paper."
+             loading="eager" decoding="async" fetchpriority="high">
       </div>
       <div class="noren" aria-hidden="true">
         <span>is he coming back</span>
@@ -571,10 +559,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Green vigil candle, lit, dressed with herb — overhead</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/02-money.jpg" width="900" height="1125"
+             alt="A lit green vigil candle dressed with herbs."
+             loading="lazy" decoding="async">
       </div>
       <div class="noren" aria-hidden="true">
         <span>the offer never came</span>
@@ -606,10 +593,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Sealed honey jar, ribbon tied — overhead on linen</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/03-person.jpg" width="900" height="1125"
+             alt="A sealed honey jar tied with ribbon, resting on linen."
+             loading="lazy" decoding="async">
       </div>
       <div class="noren" aria-hidden="true">
         <span>he stopped answering</span>
@@ -641,10 +627,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Iron nail and black salt on dark linen — overhead</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/04-protection.jpg" width="900" height="1125"
+             alt="An iron nail and a scatter of black salt on dark linen."
+             loading="lazy" decoding="async">
       </div>
       <div class="noren" aria-hidden="true">
         <span>nothing has gone right since march</span>
@@ -676,10 +661,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Small brass bell and white cloth — overhead, soft light</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/05-sickness.jpg" width="900" height="1125"
+             alt="A small brass bell on white cloth in soft light."
+             loading="lazy" decoding="async">
       </div>
       <div class="noren" aria-hidden="true">
         <span>she&rsquo;s in surgery on thursday</span>
@@ -711,10 +695,9 @@ body{overflow:hidden}
 
     <div class="obj-wrap">
       <div class="frame">
-        <div class="xh"><i></i><i></i></div>
-        <b>Photograph</b>
-        <em>Herb bundle tied and hung — overhead on brown paper</em>
-        <span class="ratio">4:5</span>
+        <img src="/photos/06-apothecary.jpg" width="900" height="1125"
+             alt="A bundle of dried herbs tied with twine on brown paper."
+             loading="lazy" decoding="async">
       </div>
       <div class="noren" aria-hidden="true">
         <span>high john</span>

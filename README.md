@@ -1,146 +1,120 @@
-# Hummingbird & Root
+# Photos
 
-Static one-page site. No build step, no dependencies, no framework. `index.html`
-carries its own CSS and JS inline, which is why the whole site is one request.
+Six photographs carry this site. They're the only image on each chapter, so
+they do most of the work.
 
-Deployed on Cloudflare Pages, straight from `main`.
+## The short version
 
----
-
-## Repo layout
+Replace the six files in this folder. Keep the filenames exactly as they are.
+No code changes needed.
 
 ```
-index.html          the site — HTML, CSS and JS in one file
-404.html            not-found page
-_headers            Cloudflare Pages security + cache headers
-robots.txt
-sitemap.xml
-site.webmanifest
-share.jpg           1200x630 Open Graph card  (PLACEHOLDER — replace)
-apple-touch-icon.png            180x180        (PLACEHOLDER — replace)
-icon-192.png / icon-512.png     PWA icons      (PLACEHOLDER — replace)
-.gitignore
+photos/01-reading.jpg       worn deck of cards, face down, on kraft paper
+photos/02-money.jpg         green vigil candle, lit, dressed with herb
+photos/03-person.jpg        sealed honey jar, ribbon tied, on linen
+photos/04-protection.jpg    iron nail and black salt on dark linen
+photos/05-sickness.jpg      small brass bell and white cloth, soft light
+photos/06-apothecary.jpg    herb bundle tied and hung, on brown paper
 ```
 
-Nothing else is needed. Do not add a package.json unless something actually
-requires building.
+The files currently in here are placeholders with the shot description printed
+on them. If you see one on the live site, that photo hasn't been replaced yet.
 
----
+## Specs
 
-## Deploy
+| | |
+|---|---|
+| Aspect ratio | **4:5** (portrait) |
+| Size | **900 × 1125** |
+| Format | JPEG, quality 80–85 |
+| Weight | under 150KB each |
+| Orientation | shot from directly overhead |
 
-1. Push this repo to GitHub.
-2. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
-   **Connect to Git** → pick the repo.
-3. Build settings:
-   - Framework preset: **None**
-   - Build command: *(leave empty)*
-   - Build output directory: `/`
-4. Save and Deploy.
-5. **Custom domains** → add `hummingbirdandroot.com` and `www.hummingbirdandroot.com`.
-   Cloudflare writes the DNS records itself if the domain is already in the account.
-6. Add a **Redirect Rule** sending `www.` to the apex, so there's one canonical host.
+4:5 is not optional. The CSS reserves that shape before the image loads, which
+is what stops the page from jumping. A 3:2 photo will get centre-cropped and
+you'll lose the edges.
 
-Every push to `main` redeploys. Pull requests get their own preview URL.
+## Shooting them
 
----
+All six should look like they were taken in the same hour by the same person,
+because the whole design rests on that. Practically:
 
-## Before it goes public
+- **One surface, one light.** Daylight from a window, no flash, no overhead
+  bulb. Same time of day for all six if you can.
+- **Straight down.** Phone parallel to the table. Not at an angle.
+- **Object roughly centred, with room around it.** The frame is small on the
+  page — a tight crop reads as clutter.
+- **Warm, matte grounds.** Kraft paper, unbleached linen, raw wood. The site's
+  background is a warm paper colour and the photos should sit in it, not fight
+  it.
+- **Don't edit toward cool or high-contrast.** The CSS already pulls saturation
+  down slightly and adds a touch of contrast to blend them. Anything heavily
+  filtered will land twice-processed.
 
-### 1. Replace the domain placeholders
+Shoot more than six. Picking the best of thirty is a different job from making
+one shot work.
 
-Every occurrence of `hummingbirdandroot.com` in the repo is a placeholder.
+## Resizing before you commit them
+
+If you have ImageMagick:
 
 ```bash
-grep -rl 'hummingbirdandroot\.com' . | xargs sed -i '' 's/hummingbirdandroot\.com/YOURDOMAIN.com/g'
+cd photos
+for f in raw/*.jpg; do
+  magick "$f" -auto-orient \
+    -resize 900x1125^ -gravity center -extent 900x1125 \
+    -quality 82 -strip "$(basename "$f")"
+done
 ```
 
-(On Linux drop the `''` after `-i`.)
+`-strip` removes EXIF, which matters: phone photos carry GPS coordinates, and
+these are being published.
 
-### 2. Replace the email
+No ImageMagick? [squoosh.app](https://squoosh.app) does the same thing in a
+browser — set Resize to 900×1125, JPEG quality 82, and it strips metadata by
+default.
 
-Eight places, plus the Instagram handle in the footer.
+## Optional: WebP
+
+Cuts each file roughly in half. Only worth doing once the real photos are in.
 
 ```bash
-grep -rl 'hello@' . | xargs sed -i '' 's/hello@hummingbirdandroot\.com/HER@ADDRESS.com/g'
-grep -rn 'instagram.com/hummingbirdandroot' index.html
+for f in *.jpg; do magick "$f" -quality 78 "${f%.jpg}.webp"; done
 ```
 
-### 3. Replace `share.jpg`
+Then in `index.html`, wrap each `<img>`:
 
-The current one is generated type on a blank ground — it works, but it's a
-holding pattern. Every Instagram and text-message link preview uses this image.
-Must be exactly **1200 × 630**. Same for the three icons.
-
-### 4. Wire the form endpoint
-
-Three places in the JS still resolve with a `setTimeout` instead of sending
-anything. Search `index.html` for:
-
-```
-Replace this timeout with a POST
-POST the bag + address to a form endpoint here
+```html
+<picture>
+  <source srcset="/photos/01-reading.webp" type="image/webp">
+  <img src="/photos/01-reading.jpg" width="900" height="1125"
+       alt="A worn tarot deck lying face down on kraft paper."
+       loading="eager" decoding="async" fetchpriority="high">
+</picture>
 ```
 
-The payload is already assembled at each spot. Any of these work with a static
-site:
+Keep the JPEG as the `<img>` fallback. Don't remove `width`, `height`, or the
+`alt` text.
 
-- **Formspree** or **Basin** — paste a URL, done, free tier is enough
-- **Cloudflare Pages Functions** — add `/functions/api/request.js`, and it
-  deploys with the site (this is the tidier option since you're already on
-  Cloudflare)
+## Alt text
 
-After wiring it, add the endpoint's origin to `connect-src` in `_headers`.
+Each image already has alt text written into `index.html`. If you change what a
+photo shows, change its alt text to match — describe the object plainly, the way
+you'd say it out loud. It's what a blind visitor gets, and it's what Google
+reads.
 
-**Do not add a card field.** Payment happens on the processor's own hosted page,
-from a link she sends after confirming. The moment a card input exists on this
-domain, the site is in PCI scope and this stops being a weekend project.
+## Loading
 
-When payments go live, use **two separate Stripe accounts** — one for the
-apothecary, one for services. Different risk categories; a hold on one should
-never freeze the other.
+Chapter 1's photo is `loading="eager"` with `fetchpriority="high"` — it's the
+first thing anyone sees. The other five are `loading="lazy"` and fetch as the
+visitor scrolls sideways toward them. Don't make them all eager; that's six
+full-size images competing on first paint.
 
-### 5. Self-host the fonts
+## Also needs replacing
 
-Currently two render-blocking requests to Google. To fix:
+`share.jpg` in the repo root — **1200 × 630**, landscape, not 4:5. This is the
+link preview for every Instagram post and text message. The current one is
+generated type on a blank ground.
 
-1. Download the Cormorant Garamond and Courier Prime woff2 files.
-2. Put them in `/fonts/`.
-3. In `index.html`, replace the three `<link>` tags to Google with an
-   `@font-face` block at the top of the `<style>`.
-4. Delete `https://fonts.googleapis.com` and `https://fonts.gstatic.com` from
-   the CSP in `_headers`.
-
-Saves roughly 200ms and removes a third-party dependency and a GDPR question.
-
----
-
-## Things to know before editing
-
-- **`body` has `overflow:hidden` on purpose.** The six chapters are a horizontal
-  scroll-snap track; the drawers are the only vertical scroll. Removing that
-  breaks the whole layout.
-- **The `<noscript>` block in `<body>` is the real fallback.** If JS fails the
-  drawers can never open, so that block is the entire site for that visitor.
-  If you change prices or services, change them there too. It's the one place
-  content is duplicated.
-- **One breakpoint: 860px.** Keep it that way. There's a second tiny query at
-  430px for the two things that need it.
-- **`inert` is what keeps focus inside an open drawer.** `aria-modal` alone
-  doesn't stop Tab. Don't remove the `setInert()` calls.
-- **All user input is escaped through `esc()`** before it goes near `innerHTML`.
-  Keep it that way if you add fields.
-
----
-
-## Known open items
-
-- The site is one URL serving six different search intents. Splitting the drawer
-  content into six real pages (`/reading/`, `/money/`, `/protection/` …) would
-  give six chances to rank instead of one. Content decision, not a code one.
-- Six product photographs still needed — each `.frame` placeholder names the shot
-  it's waiting for.
-- Glamour & Beauty work is not currently a chapter. If it comes back, it's a
-  seventh.
-- No analytics. Cloudflare Web Analytics is a one-line add and doesn't need a
-  cookie banner, if she wants numbers.
+`apple-touch-icon.png` (180×180), `icon-192.png`, `icon-512.png` — same
+placeholder situation.
