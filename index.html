@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tulasi Toth — Vedic Astrologer</title>
+<meta name="description" content="Classical Vedic astrology readings by video, worldwide. Birth chart readings, compatibility, auspicious timing, single-question readings, and remedies.">
+
+<meta property="og:title" content="Tulasi Toth — Vedic Astrologer">
+<meta property="og:description" content="Classical Vedic astrology readings by video, worldwide.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tulasitoth.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --petrol:#0F2E2C;
+    --petrol-2:#143B38;
+    --brass:#C08A2E;
+    --brass-lite:#DCB064;
+    --chalk:#E9E5DA;
+    --chalk-dim:#C9C4B6;
+    --slate:#4A5D5C;
+    --line:rgba(15,46,44,.16);
+    --line-dark:rgba(233,229,218,.20);
+    --measure:34rem;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+  }
+
+  body{
+    margin:0;
+    background:var(--chalk);
+    color:var(--petrol);
+    font-family:"Karla",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces",Georgia,serif;
+    font-variation-settings:"SOFT" 0,"WONK" 1;
+    font-weight:400;
+    line-height:1.08;
+    letter-spacing:-.015em;
+    margin:0;
+  }
+
+  a{color:inherit}
+
+  .wrap{
+    width:100%;
+    max-width:64rem;
+    margin:0 auto;
+    padding:0 1.6rem;
+  }
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.19em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--petrol);
+    color:var(--chalk);
+    padding:4.5rem 0 4rem;
+  }
+  .hero .eyebrow{color:var(--brass-lite)}
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:3rem;
+    align-items:center;
+  }
+  @media(min-width:900px){
+    .hero-grid{grid-template-columns:1.15fr .85fr;gap:4.5rem}
+  }
+
+  .hero h1{
+    font-size:clamp(3rem,9vw,5.25rem);
+    margin:.85rem 0 0;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    display:block;
+    font-size:.42em;
+    letter-spacing:.01em;
+    color:var(--brass-lite);
+    margin-top:.6rem;
+  }
+  .hero p.lede{
+    font-size:1.12rem;
+    color:var(--chalk-dim);
+    max-width:30rem;
+    margin:1.7rem 0 2.2rem;
+  }
+
+  /* ---------- chart ---------- */
+  .chart{
+    width:100%;
+    max-width:23rem;
+    margin:0 auto;
+    display:block;
+  }
+  .chart rect{fill:none;stroke:var(--line-dark);stroke-width:1}
+  .chart line{stroke:var(--line-dark);stroke-width:1}
+  .chart .house-no{
+    fill:var(--brass);
+    font-family:"Karla",sans-serif;
+    font-size:9px;
+    letter-spacing:.08em;
+    opacity:.85;
+  }
+  .chart .core-name{
+    fill:var(--chalk);
+    font-family:"Fraunces",serif;
+    font-size:15px;
+    letter-spacing:.02em;
+    text-anchor:middle;
+  }
+  .chart .core-sub{
+    fill:var(--brass-lite);
+    font-family:"Karla",sans-serif;
+    font-size:7.2px;
+    letter-spacing:.2em;
+    text-anchor:middle;
+  }
+  .chart-caption{
+    text-align:center;
+    font-size:.75rem;
+    letter-spacing:.06em;
+    color:var(--chalk-dim);
+    margin-top:1.1rem;
+    opacity:.8;
+  }
+
+  /* ---------- buttons ---------- */
+  .btns{display:flex;flex-wrap:wrap;gap:.7rem}
+  .btn{
+    display:inline-block;
+    padding:.8rem 1.5rem;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:.92rem;
+    letter-spacing:.02em;
+    border:1px solid var(--brass);
+    transition:background .18s ease,color .18s ease;
+  }
+  .btn-solid{background:var(--brass);color:var(--petrol)}
+  .btn-solid:hover{background:var(--brass-lite)}
+  .btn-ghost{color:var(--brass-lite)}
+  .btn-ghost:hover{background:var(--brass);color:var(--petrol)}
+  .btn:focus-visible,a:focus-visible{outline:2px solid var(--brass-lite);outline-offset:3px}
+
+  /* ---------- sections ---------- */
+  section{padding:4.5rem 0}
+  .sec-head{margin-bottom:2.8rem;max-width:var(--measure)}
+  .sec-head .eyebrow{color:var(--brass);display:block;margin-bottom:.9rem}
+  .sec-head h2{font-size:clamp(1.9rem,4.5vw,2.7rem)}
+  .sec-head p{color:var(--slate);margin:.9rem 0 0}
+
+  /* ---------- readings ---------- */
+  .readings{
+    display:grid;
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .reading{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.4rem;
+    padding:1.7rem 0;
+    border-bottom:1px solid var(--line);
+  }
+  @media(min-width:760px){
+    .reading{grid-template-columns:15rem 1fr;gap:2.5rem;align-items:baseline}
+  }
+  .reading h3{font-size:1.32rem}
+  .reading p{margin:0;color:var(--slate)}
+
+  /* ---------- about ---------- */
+  .about{background:var(--petrol-2);color:var(--chalk)}
+  .about .eyebrow{color:var(--brass-lite)}
+  .about h2{color:var(--chalk)}
+  .about-body{max-width:var(--measure);color:var(--chalk-dim)}
+  .about-body p{margin:0 0 1.15rem}
+
+  .creds{
+    list-style:none;
+    padding:0;
+    margin:2.6rem 0 0;
+    display:grid;
+    gap:0;
+    border-top:1px solid var(--line-dark);
+    max-width:44rem;
+  }
+  .creds li{
+    padding:1rem 0;
+    border-bottom:1px solid var(--line-dark);
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:1.5rem;
+    align-items:baseline;
+    font-size:.95rem;
+  }
+  .creds .yr{
+    color:var(--brass-lite);
+    font-variant-numeric:tabular-nums;
+    font-size:.85rem;
+    letter-spacing:.06em;
+  }
+  .creds .issuer{display:block;color:var(--chalk-dim);font-size:.85rem;margin-top:.15rem}
+
+  /* ---------- steps ---------- */
+  .steps{
+    display:grid;
+    gap:2rem;
+    counter-reset:step;
+  }
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:2.5rem}}
+  .step{counter-increment:step}
+  .step::before{
+    content:counter(step);
+    font-family:"Fraunces",serif;
+    font-size:2rem;
+    color:var(--brass);
+    display:block;
+    line-height:1;
+    margin-bottom:.7rem;
+  }
+  .step h3{font-size:1.15rem;margin-bottom:.4rem}
+  .step p{margin:0;color:var(--slate);font-size:.95rem}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:var(--petrol);
+    color:var(--chalk);
+    text-align:center;
+  }
+  .contact h2{color:var(--chalk);font-size:clamp(2rem,5vw,3rem)}
+  .contact p{color:var(--chalk-dim);max-width:30rem;margin:1.1rem auto 2.2rem}
+  .contact .btns{justify-content:center}
+  .contact .eyebrow{color:var(--brass-lite);display:block;margin-bottom:.9rem}
+
+  footer{
+    background:var(--petrol);
+    color:var(--chalk-dim);
+    border-top:1px solid var(--line-dark);
+    padding:2rem 0;
+    font-size:.82rem;
+  }
+  .foot-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.6rem 1.6rem;
+    justify-content:space-between;
+    align-items:center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Vedic astrology · consultations by video</span>
+      <h1>Tulasi Toth<em>Jyotish reader</em></h1>
+      <p class="lede">
+        Readings drawn from the classical Vedic system — the sidereal zodiac and
+        the planetary periods that mark when things ripen. Based in Szeged,
+        Hungary; reading for clients anywhere.
+      </p>
+      <div class="btns">
+        <a class="btn btn-solid" href="#contact">Book a reading</a>
+        <a class="btn btn-ghost" href="#readings">See the readings</a>
+      </div>
+    </div>
+
+    <div>
+      <!-- South Indian square chart, left empty: the chart that matters is yours -->
+      <svg class="chart" viewBox="0 0 240 240" role="img"
+           aria-label="An empty South Indian style birth chart, twelve houses around a hollow centre.">
+        <rect x="4" y="4" width="232" height="232"/>
+        <line x1="62" y1="4"  x2="62"  y2="236"/>
+        <line x1="120" y1="4" x2="120" y2="62"/>
+        <line x1="178" y1="4" x2="178" y2="236"/>
+        <line x1="120" y1="178" x2="120" y2="236"/>
+        <line x1="4" y1="62"  x2="236" y2="62"/>
+        <line x1="4" y1="120" x2="62"  y2="120"/>
+        <line x1="4" y1="178" x2="236" y2="178"/>
+        <line x1="178" y1="120" x2="236" y2="120"/>
+
+        <text class="house-no" x="10" y="17">12</text>
+        <text class="house-no" x="68" y="17">1</text>
+        <text class="house-no" x="126" y="17">2</text>
+        <text class="house-no" x="184" y="17">3</text>
+        <text class="house-no" x="10" y="75">11</text>
+        <text class="house-no" x="184" y="75">4</text>
+        <text class="house-no" x="10" y="133">10</text>
+        <text class="house-no" x="184" y="133">5</text>
+        <text class="house-no" x="10" y="191">9</text>
+        <text class="house-no" x="68" y="191">8</text>
+        <text class="house-no" x="126" y="191">7</text>
+        <text class="house-no" x="184" y="191">6</text>
+
+        <text class="core-name" x="120" y="118">Your chart</text>
+        <text class="core-sub"  x="120" y="136">DATE · TIME · PLACE</text>
+      </svg>
+      <p class="chart-caption">South Indian chart · twelve houses, one centre</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============ READINGS ============ -->
+<section id="readings">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What I read</span>
+      <h2>Five kinds of reading</h2>
+      <p>Every one starts from your birth chart. Which reading you want depends on
+         whether you're asking about a life, a match, a date, or a single question.</p>
+    </div>
+
+    <div class="readings">
+      <article class="reading">
+        <h3>Birth chart reading</h3>
+        <p>A full reading of the natal chart — temperament, work, relationships,
+           family, health — and where you currently sit in the sequence of
+           planetary periods. The right place to start if you've never had a
+           chart read.</p>
+      </article>
+
+      <article class="reading">
+        <h3>Compatibility reading</h3>
+        <p>Two charts read side by side, for couples deciding whether to marry or
+           for families weighing a match. Covers the traditional compatibility
+           points, what supports the union, and where friction is likely.</p>
+      </article>
+
+      <article class="reading">
+        <h3>Auspicious timing</h3>
+        <p>Choosing a date and hour for something that matters — a wedding, a
+           move, signing a business, beginning a course of study. You give the
+           window and the event; I find the openings inside it.</p>
+      </article>
+
+      <article class="reading">
+        <h3>Single-question reading</h3>
+        <p>One question, read from the moment you ask it rather than from your
+           birth chart. Useful when a decision is in front of you now and you
+           want a direct answer rather than a full life reading.</p>
+      </article>
+
+      <article class="reading">
+        <h3>Remedies</h3>
+        <p>Practical measures matched to what the chart shows — mantra, charity,
+           fasting days, gemstones where they're genuinely indicated. Given as
+           something you can actually keep up, not a list you'll abandon in a
+           week.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Training</span>
+      <h2>Where the reading comes from</h2>
+    </div>
+
+    <div class="about-body">
+      <p>I trained in Vedic astrology, numerology, and Vastu Shastra at the
+         Academy of Vedic Vidya in India, and I'm a certified yoga teacher under
+         the Yoga Certification Board of the Ministry of Ayush, Government of
+         India, at the 800-hour standard. I've taught remotely to students across
+         several countries since 2025.</p>
+
+      <p>I read in the classical system: sidereal zodiac, the twelve houses, the
+         nine planets, and the dasha periods that set the timing. I'll tell you
+         what the chart says, including the parts that aren't comfortable, and I
+         won't pad a reading with things it doesn't support.</p>
+
+      <p>Consultations are in English.</p>
+    </div>
+
+    <ul class="creds">
+      <li>
+        <span>Vedic Astrology<span class="issuer">Academy of Vedic Vidya, India</span></span>
+        <span class="yr">2024</span>
+      </li>
+      <li>
+        <span>Advanced Numerology<span class="issuer">Academy of Vedic Vidya, India</span></span>
+        <span class="yr">2024</span>
+      </li>
+      <li>
+        <span>Vastu Shastra<span class="issuer">Academy of Vedic Vidya, India</span></span>
+        <span class="yr">2025</span>
+      </li>
+      <li>
+        <span>Yoga Teacher &amp; Evaluator, 800-hour<span class="issuer">Yoga Certification Board, Ministry of Ayush, Government of India</span></span>
+        <span class="yr">2024</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three things, then we talk</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <h3>Send your birth details</h3>
+        <p>Date, place, and the exact time of birth. Time matters more than
+           people expect — the chart can shift within a few minutes. If you don't
+           know it, say so and we'll work with what you have.</p>
+      </div>
+      <div class="step">
+        <h3>Pick a time</h3>
+        <p>Sessions run about an hour over video. I read across time zones, so
+           tell me roughly when your day is free and we'll find something.</p>
+      </div>
+      <div class="step">
+        <h3>Talk it through</h3>
+        <p>You get the reading live, with room to ask. Afterwards I send written
+           notes covering the main points and any remedies we discussed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Book</span>
+    <h2>Send me your birth details</h2>
+    <p>Message me with your date, time, and place of birth and which reading
+       you're after. I'll come back with availability and the fee.</p>
+    <div class="btns">
+      <a class="btn btn-solid" href="https://wa.me/36000000000" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a class="btn btn-ghost" href="mailto:hello@tulasitoth.com?subject=Reading%20enquiry">Email me</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>Tulasi Toth · Vedic astrology · Szeged, Hungary</span>
+    <span>Readings are for reflection and guidance. They are not medical, legal, or financial advice.</span>
+  </div>
+</footer>
+
+</body>
+</html>
