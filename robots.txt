@@ -1,0 +1,5 @@
+# Hummingbird & Root
+User-agent: *
+Allow: /
+
+Sitemap: https://hummingbirdandroot.com/sitemap.xml
